@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kaaraakoo/screen/menu_page.dart';
-import 'package:kaaraakoo/onboarding_page.dart';
+import 'package:kaaraakoo/screen/onboarding_page.dart';
 import 'package:kaaraakoo/variable/user_info.dart';
 
 class switchPage extends StatelessWidget {
@@ -8,6 +8,6 @@ class switchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return show ? onboardingPage() : const menuPage();
+    return show ? onboardingPage() : menuPage();
   }
 }
