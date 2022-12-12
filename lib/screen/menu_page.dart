@@ -9,6 +9,7 @@ class menuPage extends StatefulWidget {
 
 class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
   List<bool> select = [false, false, false, false, false, false, false, false, false, false];
+  bool select_one = false;
 
   final List<AnimationController> _fadeAnimationController = [];
   final List<Animation<double>> _fadeAnimation = [];
@@ -17,18 +18,19 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < 11; i++){
       _fadeAnimationController.add(
           AnimationController(
             vsync: this,
-            duration: const Duration(milliseconds: 200),
+            duration: const Duration(milliseconds: 65),
             value: 1,
           ),
       );
 
       _fadeAnimation.add(CurvedAnimation(
         parent: _fadeAnimationController[i],
-        curve: Curves.easeIn,
+        curve: Curves.linear,
+        reverseCurve: Curves.linear,
       ));
     }
   }
@@ -40,32 +42,73 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
       backgroundColor: Color(0xFFE7E1DB),
       body: Stack(
         children: [
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.413,
-            left: MediaQuery.of(context).size.width * 0.32,
-            child: Container(
-              width: 150,
-              height: 150,
-              decoration: BoxDecoration(
-                color: const Color(0xFFF5564E),
-                borderRadius: BorderRadius.circular(150),
-              ),
-              child: const Center(
-                child: Text("kaaraakoo", style: TextStyle(color: Colors.white),),
+          AnimatedPositioned(
+            top: MediaQuery.of(context).size.height * 0.413 + 15,
+            left: MediaQuery.of(context).size.width * 0.32 + 15,
+            duration: const Duration(seconds: 2),
+            child: FadeTransition(
+              opacity: _fadeAnimation[0],
+              child: Container(
+                width: 120,
+                height: 120,
+                decoration: BoxDecoration(
+                  gradient: RadialGradient(
+                //    center: Alignment(0.7, -0.6),
+                    radius: 0.5,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      //Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(150),
+                ),
+                child: Center(
+                  child: Image.asset(
+                    color: Colors.white,
+                    "asset/logo.png",
+                    height: 100,
+                    width: 100,
+                  ),
+                ),
               ),
             ),
           ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.413 - 110,
-            left: MediaQuery.of(context).size.width * 0.32 + 90,
+          //
+          AnimatedPositioned(
+            top: select_one ? MediaQuery.of(context).size.height * 0.413 - 110 :MediaQuery.of(context).size.height * 0.413 - 20,
+            left: select_one ? MediaQuery.of(context).size.width * 0.32 + 90 : MediaQuery.of(context).size.width * 0.32 + 60,
+            duration: Duration(milliseconds: 666),
             child: AnimatedOpacity(
-              opacity: select[0] ? 1 : 0,
-              duration: const Duration(seconds: 2),
+              opacity: select_one ? 1 : 0,
+              duration: const Duration(milliseconds: 666),
               child: Container(
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: ElevatedButton(
@@ -95,17 +138,33 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
               ),
             ),
           ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.413 + 90,
-            left: MediaQuery.of(context).size.width * 0.32 + 170,
+          AnimatedPositioned(
+            top: select_one ? MediaQuery.of(context).size.height * 0.413 + 90 : MediaQuery.of(context).size.height * 0.413 + 75,
+            left: select_one ? MediaQuery.of(context).size.width * 0.32 + 170 : MediaQuery.of(context).size.width * 0.32 + 90,
+            duration: Duration(milliseconds: 666),
             child: AnimatedOpacity(
-              opacity: select[0] ? 1 : 0,
-              duration: const Duration(seconds: 2),
+              opacity: select_one ? 1 : 0,
+              duration: const Duration(milliseconds: 666),
               child: Container(
                 width: 70,
                 height: 70,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(70),
                 ),
                 child: ElevatedButton(
@@ -135,17 +194,33 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
               ),
             ),
           ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.413 + 200,
-            left: MediaQuery.of(context).size.width * 0.32,
+          AnimatedPositioned(
+            top: select_one ? MediaQuery.of(context).size.height * 0.413 + 200 : MediaQuery.of(context).size.height * 0.413 + 80,
+            left: select_one ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 + 25,
+            duration: Duration(milliseconds: 666),
             child: AnimatedOpacity(
-              opacity: select[0] ? 1 : 0,
-              duration: const Duration(seconds: 2),
+              opacity: select_one ? 1 : 0,
+              duration: const Duration(milliseconds: 666),
               child: Container(
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: ElevatedButton(
@@ -175,17 +250,33 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
               ),
             ),
           ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.413 + 70,
-            left: MediaQuery.of(context).size.width * 0.32 - 90,
+          AnimatedPositioned(
+            top: select_one ? MediaQuery.of(context).size.height * 0.413 + 70 : MediaQuery.of(context).size.height * 0.413 + 75,
+            left: select_one ? MediaQuery.of(context).size.width * 0.32 - 90 : MediaQuery.of(context).size.width * 0.32  - 5,
+            duration: Duration(milliseconds: 666),
             child: AnimatedOpacity(
-              opacity: select[0] ? 1 : 0,
-              duration: const Duration(seconds: 2),
+              opacity: select_one ? 1 : 0,
+              duration: const Duration(milliseconds: 666),
               child: Container(
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: ElevatedButton(
@@ -215,17 +306,33 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
               ),
             ),
           ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.413 - 70,
-            left: MediaQuery.of(context).size.width * 0.32 - 15,
+          AnimatedPositioned(
+            top: select_one ? MediaQuery.of(context).size.height * 0.413 - 70 : MediaQuery.of(context).size.height * 0.413,
+            left: select_one ? MediaQuery.of(context).size.width * 0.32 - 15 : MediaQuery.of(context).size.width * 0.32,
+            duration: Duration(milliseconds: 666),
             child: AnimatedOpacity(
-              opacity: select[0] ? 1 : 0,
-              duration: const Duration(seconds: 2),
+              opacity: select_one ? 1 : 0,
+              duration: const Duration(milliseconds: 666),
               child: Container(
                 width: 70,
                 height: 70,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(70),
                 ),
                 child: ElevatedButton(
@@ -255,20 +362,36 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
               ),
             ),
           ),
+          //
           AnimatedPositioned(
-            top: select[0] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 - 150,
+            top: select[0] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 - 100,
             left: select[0] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 + 50,
-            duration: const Duration(seconds: 2),
+            duration: const Duration(milliseconds: 666),
             child: FadeTransition(
-              opacity: _fadeAnimation[0],
+              opacity: _fadeAnimation[1],
               child: AnimatedContainer(
                 width: select[0] ? 150 : 50,
                 height: select[0]? 150 : 50,
-                duration: const Duration(seconds: 2),
-                curve: Curves.linear,
+                duration: const Duration(milliseconds: 666),
+                curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
                   borderRadius: BorderRadius.circular(select[0] ? 150 : 50),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ]
                 ),
                 child: ElevatedButton(
                   style: ButtonStyle(
@@ -285,10 +408,8 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                     ),
                   ),
                   onPressed: () async {
-                    print("0");
                     if(check(0)){
                       setState(() {
-                        select[0] = !select[0];
                         for(int i = 0; i < 10; i++){
                           if(i == 0){
                             continue;
@@ -296,20 +417,37 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                           select[i] = false;
                         }
                       });
-                      if(select[0]){
+                      if(!select[0]){
+                        select[0] = !select[0];
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 0) {
+                          if(i == 1) {
                             continue;
                           }
                           await _fadeAnimationController[i].reverse();
                         }
+                        Timer(
+                            const Duration(milliseconds: 100), ()=> setState(() {
+                              select_one = true;
+                            }
+                            )
+                        );
                       } else {
-                        for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 0) {
-                            continue;
+                        setState(() {
+                          select_one = false;
+                        });
+                        Timer(
+                            const Duration(milliseconds: 666), () async {
+                          setState(() {
+                            select[0] = !select[0];
+                          });
+                          for(int i = 0; i < _fadeAnimationController.length; i++){
+                            if(i == 1) {
+                              continue;
+                            }
+                            await _fadeAnimationController[i].forward();
                           }
-                          await _fadeAnimationController[i].forward();
                         }
+                        );
                       }
                     }
                   },
@@ -322,18 +460,33 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
             ),
           ),
           AnimatedPositioned(
-            top: select[1] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 - 70,
-            left: select[1] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 - 15,
-            duration: const Duration(seconds: 2),
+            top: select[1] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 - 75,
+            left: select[1] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 - 20,
+            duration: const Duration(milliseconds: 666),
             child: FadeTransition(
-              opacity: _fadeAnimation[1],
+              opacity: _fadeAnimation[2],
               child: AnimatedContainer(
                 width: select[1] ? 150 : 70,
                 height: select[1]? 150 : 70,
-                duration: const Duration(seconds: 2),
-                curve: Curves.decelerate,
+                duration: const Duration(milliseconds: 666),
+                curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(select[1] ? 150 : 70),
                 ),
                 child: ElevatedButton(
@@ -351,7 +504,6 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                     ),
                   ),
                   onPressed: () async {
-                    print("1");
                     if(check(1)){
                       setState(() {
                         select[1] = !select[1];
@@ -364,14 +516,14 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                       });
                       if(select[1]){
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 1) {
+                          if(i == 2) {
                             continue;
                           }
                           await _fadeAnimationController[i].reverse();
                         }
                       } else {
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 1) {
+                          if(i == 2) {
                             continue;
                           }
                           await _fadeAnimationController[i].forward();
@@ -388,18 +540,33 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
             ),
           ),
           AnimatedPositioned(
-            top: select[2] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 - 40,
-            left: select[2] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 - 125,
-            duration: const Duration(seconds: 2),
+            top: select[2] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 - 30,
+            left: select[2] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 - 100,
+            duration: const Duration(milliseconds: 666),
             child: FadeTransition(
-              opacity: _fadeAnimation[2],
+              opacity: _fadeAnimation[3],
               child: AnimatedContainer(
                 width: select[2] ? 150 : 90,
                 height: select[2]? 150 : 90,
-                duration: const Duration(seconds: 2),
-                curve: Curves.decelerate,
+                duration: const Duration(milliseconds: 666),
+                curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(select[2] ? 150 : 90),
                 ),
                 child: ElevatedButton(
@@ -417,7 +584,6 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                     ),
                   ),
                   onPressed: () async {
-                    print("2");
                     if(check(2)){
                       setState(() {
                         select[2] = !select[2];
@@ -430,14 +596,14 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                       });
                       if(select[2]){
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 2) {
+                          if(i == 3) {
                             continue;
                           }
                           await _fadeAnimationController[i].reverse();
                         }
                       } else {
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 2) {
+                          if(i == 3) {
                             continue;
                           }
                           await _fadeAnimationController[i].forward();
@@ -456,16 +622,31 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
           AnimatedPositioned(
             top: select[3] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 + 70,
             left: select[3] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 - 90,
-            duration: const Duration(seconds: 2),
+            duration: const Duration(milliseconds: 666),
             child: FadeTransition(
-              opacity: _fadeAnimation[3],
+              opacity: _fadeAnimation[4],
               child: AnimatedContainer(
                 width: select[3] ? 150 : 50,
                 height: select[3]? 150 : 50,
-                duration: const Duration(seconds: 2),
-                curve: Curves.decelerate,
+                duration: const Duration(milliseconds: 666),
+                curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(select[3] ? 150 : 50),
                 ),
                 child: ElevatedButton(
@@ -483,7 +664,6 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                     ),
                   ),
                   onPressed: () async {
-                    print("3");
                     if(check(3)){
                       setState(() {
                         select[3] = !select[3];
@@ -496,14 +676,14 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                       });
                       if(select[3]){
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 3) {
+                          if(i == 4) {
                             continue;
                           }
                           await _fadeAnimationController[i].reverse();
                         }
                       } else {
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 3) {
+                          if(i == 4) {
                             continue;
                           }
                           await _fadeAnimationController[i].forward();
@@ -520,18 +700,33 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
             ),
           ),
           AnimatedPositioned(
-            top: select[4] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 + 110,
-            left: select[4] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 - 50,
-            duration: const Duration(seconds: 2),
+            top: select[4] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 + 130,
+            left: select[4] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 - 65,
+            duration: const Duration(milliseconds: 666),
             child: FadeTransition(
-              opacity: _fadeAnimation[4],
+              opacity: _fadeAnimation[5],
               child: AnimatedContainer(
                 width: select[4] ? 150 : 70,
                 height: select[4]? 150 : 70,
-                duration: const Duration(seconds: 2),
-                curve: Curves.decelerate,
+                duration: const Duration(milliseconds: 666),
+                curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(select[4] ? 150 : 70),
                 ),
                 child: ElevatedButton(
@@ -549,7 +744,6 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                     ),
                   ),
                   onPressed: () async {
-                    print("4");
                     if(check(4)){
                       setState(() {
                         select[4] = !select[4];
@@ -562,14 +756,14 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                       });
                       if(select[4]){
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 4) {
+                          if(i == 5) {
                             continue;
                           }
                           await _fadeAnimationController[i].reverse();
                         }
                       } else {
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 4) {
+                          if(i == 5) {
                             continue;
                           }
                           await _fadeAnimationController[i].forward();
@@ -586,18 +780,33 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
             ),
           ),
           AnimatedPositioned(
-            top: select[5] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 + 200,
+            top: select[5] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 + 180,
             left: select[5] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32,
-            duration: const Duration(seconds: 2),
+            duration: const Duration(milliseconds: 666),
             child: FadeTransition(
-              opacity: _fadeAnimation[5],
+              opacity: _fadeAnimation[6],
               child: AnimatedContainer(
                 width: select[5] ? 150 : 100,
                 height: select[5]? 150 : 100,
-                duration: const Duration(seconds: 2),
-                curve: Curves.decelerate,
+                duration: const Duration(milliseconds: 666),
+                curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(select[5] ? 150 : 100),
                 ),
                 child: ElevatedButton(
@@ -615,7 +824,6 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                     ),
                   ),
                   onPressed: () async {
-                    print("5");
                     if(check(5)){
                       setState(() {
                         select[5] = !select[5];
@@ -628,14 +836,14 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                       });
                       if(select[5]){
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 5) {
+                          if(i == 6) {
                             continue;
                           }
                           await _fadeAnimationController[i].reverse();
                         }
                       } else {
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 5) {
+                          if(i == 6) {
                             continue;
                           }
                           await _fadeAnimationController[i].forward();
@@ -652,18 +860,33 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
             ),
           ),
           AnimatedPositioned(
-            top: select[6] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 + 160,
-            left: select[6] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 + 100,
-            duration: const Duration(seconds: 2),
+            top: select[6] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 + 180,
+            left: select[6] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 + 115,
+            duration: const Duration(milliseconds: 666),
             child: FadeTransition(
-              opacity: _fadeAnimation[6],
+              opacity: _fadeAnimation[7],
               child: AnimatedContainer(
                 width: select[6] ? 150 : 50,
                 height: select[6]? 150 : 50,
-                duration: const Duration(seconds: 2),
-                curve: Curves.decelerate,
+                duration: const Duration(milliseconds: 666),
+                curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(select[6] ? 150 : 50),
                 ),
                 child: ElevatedButton(
@@ -681,7 +904,6 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                     ),
                   ),
                   onPressed: () async {
-                    print("6");
                     if(check(6)){
                       setState(() {
                         select[6] = !select[6];
@@ -694,14 +916,14 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                       });
                       if(select[6]){
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 6) {
+                          if(i == 7) {
                             continue;
                           }
                           await _fadeAnimationController[i].reverse();
                         }
                       } else {
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 6) {
+                          if(i == 7) {
                             continue;
                           }
                           await _fadeAnimationController[i].forward();
@@ -718,18 +940,33 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
             ),
           ),
           AnimatedPositioned(
-            top: select[7] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 + 90,
-            left: select[7] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 + 170,
-            duration: const Duration(seconds: 2),
+            top: select[7] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 + 100,
+            left: select[7] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 + 160,
+            duration: const Duration(milliseconds: 666),
             child: FadeTransition(
-              opacity: _fadeAnimation[7],
+              opacity: _fadeAnimation[8],
               child: AnimatedContainer(
                 width: select[7] ? 150 : 70,
                 height: select[7]? 150 : 70,
-                duration: const Duration(seconds: 2),
-                curve: Curves.decelerate,
+                duration: const Duration(milliseconds: 666),
+                curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(select[7] ? 150 : 70),
                 ),
                 child: ElevatedButton(
@@ -747,7 +984,6 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                     ),
                   ),
                   onPressed: () async {
-                    print("7");
                     if(check(7)){
                       setState(() {
                         select[7] = !select[7];
@@ -760,14 +996,14 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                       });
                       if(select[7]){
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 7) {
+                          if(i == 8) {
                             continue;
                           }
                           await _fadeAnimationController[i].reverse();
                         }
                       } else {
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 7) {
+                          if(i == 8) {
                             continue;
                           }
                           await _fadeAnimationController[i].forward();
@@ -784,18 +1020,33 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
             ),
           ),
           AnimatedPositioned(
-            top: select[8] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 - 20,
+            top: select[8] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 + 20,
             left: select[8] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 + 180,
-            duration: const Duration(seconds: 2),
+            duration: const Duration(milliseconds: 666),
             child: FadeTransition(
-              opacity: _fadeAnimation[8],
+              opacity: _fadeAnimation[9],
               child: AnimatedContainer(
                 width: select[8] ? 150 : 50,
                 height: select[8]? 150 : 50,
-                duration: const Duration(seconds: 2),
-                curve: Curves.decelerate,
+                duration: const Duration(milliseconds: 666),
+                curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(select[8] ? 150 : 50),
                 ),
                 child: ElevatedButton(
@@ -813,7 +1064,6 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                     ),
                   ),
                   onPressed: () async {
-                    print("8");
                     if(check(8)){
                       setState(() {
                         select[8] = !select[8];
@@ -826,14 +1076,14 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                       });
                       if(select[8]){
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 8) {
+                          if(i == 9) {
                             continue;
                           }
                           await _fadeAnimationController[i].reverse();
                         }
                       } else {
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 8) {
+                          if(i == 9) {
                             continue;
                           }
                           await _fadeAnimationController[i].forward();
@@ -850,18 +1100,33 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
             ),
           ),
           AnimatedPositioned(
-            top: select[9] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 - 110,
-            left: select[9] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 + 90,
-            duration: const Duration(seconds: 2),
+            top: select[9] ? MediaQuery.of(context).size.height * 0.413 : MediaQuery.of(context).size.height * 0.413 - 80,
+            left: select[9] ? MediaQuery.of(context).size.width * 0.32 : MediaQuery.of(context).size.width * 0.32 + 100,
+            duration: const Duration(milliseconds: 666),
             child: FadeTransition(
-              opacity: _fadeAnimation[9],
+              opacity: _fadeAnimation[10],
               child: AnimatedContainer(
                 width: select[9] ? 150 : 100,
                 height: select[9]? 150 : 100,
-                duration: const Duration(seconds: 2),
-                curve: Curves.decelerate,
+                duration: const Duration(milliseconds: 666),
+                curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFF5564E),
+                  gradient: RadialGradient(
+                    center: Alignment(0.7, -0.6),
+                    radius: 1.6,
+                    colors: <Color>[
+                      Color(0xFFFFBBB8),
+                      Color(0xFFF5564E),
+                      Color(0xFF490500),
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color(0x804E4E4E),
+                      blurRadius: 3,
+                      spreadRadius: 0.1,
+                    ),
+                  ],
                   borderRadius: BorderRadius.circular(select[9] ? 150 : 100),
                 ),
                 child: ElevatedButton(
@@ -879,7 +1144,6 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                     ),
                   ),
                   onPressed: () async {
-                    print("9");
                     if(check(9)){
                       setState(() {
                         select[9] = !select[9];
@@ -892,14 +1156,14 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                       });
                       if(select[9]){
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 9) {
+                          if(i == 10) {
                             continue;
                           }
                           await _fadeAnimationController[i].reverse();
                         }
                       } else {
                         for(int i = 0; i < _fadeAnimationController.length; i++){
-                          if(i == 9) {
+                          if(i == 10) {
                             continue;
                           }
                           await _fadeAnimationController[i].forward();
