@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 class menuPage extends StatefulWidget {
@@ -10,7 +9,6 @@ class menuPage extends StatefulWidget {
 class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
   List<bool> select = [false, false, false, false, false, false, false, false, false, false];
   bool select_one = false;
-
   final List<AnimationController> _fadeAnimationController = [];
   final List<Animation<double>> _fadeAnimation = [];
 
@@ -53,7 +51,6 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 height: 120,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                //    center: Alignment(0.7, -0.6),
                     radius: 0.5,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -94,7 +91,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 height: 100,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: Alignment(-0.5, 0.9),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -150,7 +147,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 height: 70,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: Alignment(-0.9, -0.5),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -206,7 +203,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 height: 100,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: Alignment(0.1, -0.9),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -262,7 +259,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 height: 50,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: Alignment(0.7, -0.2),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -318,7 +315,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 height: 70,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: Alignment(0.4, 0.8),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -376,7 +373,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: select[0] ? Alignment(0, 0) : Alignment(0, 1),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -472,7 +469,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: select[1] ? Alignment(0, 0) : Alignment(0.7, 0.6),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -552,7 +549,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: select[2] ? Alignment(0, 0) : Alignment(0.8, 0.1),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -632,7 +629,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: select[3] ? Alignment(0, 0) : Alignment(0.9, -0.4),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -712,7 +709,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: select[4] ? Alignment(0, 0) : Alignment(0.7, -0.6),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -792,7 +789,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: select[5] ? Alignment(0, 0) : Alignment(0, -1),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -872,7 +869,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: select[6] ? Alignment(0, 0) : Alignment(-0.7, -0.7),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -952,7 +949,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: select[7] ? Alignment(0, 0) : Alignment(-0.7, -0.6),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -1032,7 +1029,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: select[8] ? Alignment(0, 0) : Alignment(-0.9, 0.4),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
@@ -1112,7 +1109,7 @@ class _menuPageState extends State<menuPage> with TickerProviderStateMixin {
                 curve: Curves.easeOutQuint,
                 decoration: BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment(0.7, -0.6),
+                    center: select[9] ? Alignment(0, 0) : Alignment(-0.5, 0.8),
                     radius: 1.6,
                     colors: <Color>[
                       Color(0xFFFFBBB8),
